@@ -1,0 +1,39 @@
+﻿# Dependencies (installed from npm, not needed in package)
+node_modules/
+
+# Source files (compiled to lib/)
+src/
+tests/
+
+# Development files
+*.ts
+!*.d.ts
+vitest.config.ts
+tsup.config.ts
+tsconfig.json
+eslint.config.js
+vitest.config.ts
+
+# Git
+.git/
+.gitignore
+
+# CI/CD
+.github/
+
+# Lock files
+package-lock.json
+pnpm-lock.yaml
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Docs source
+*.md
+!README.md
+!CHANGELOG.md
+!LICENSE

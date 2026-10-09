@@ -1,6 +1,6 @@
 {
-  "name": "dsh-feishu",
-  "version": "0.0.1",
+  "name": "dsh-feishu-cloud",
+  "version": "0.0.2",
   "description": "飞书云盘、云文档、多维表格 DSH 插件 — 让 DeepSeek Harness 直接读写飞书",
   "description:en": "Feishu (Lark) cloud drive, documents, and bitable plugin for DeepSeek Harness",
   "keywords": [
@@ -38,16 +38,17 @@
     }
   },
   "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
     "client": {
       "platform": "web",
-      "inject": [
-        "@deepseek-ai/dsh-client-ui-settings-plugins"
-      ]
+      "inject": []
     }
   },
   "files": [
     "lib",
-    "assets",
+    "cordis.patch.yml",
     "README.md",
     "LICENSE",
     "CHANGELOG.md"
@@ -67,7 +68,6 @@
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "^4.0.4",
-    "@deepseek-ai/dsh-settings": "0.0.1-rc.1",
     "@deepseek-ai/schemastery": "^3.18.4",
     "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
@@ -78,17 +78,23 @@
     "vitest": "^1.4.0"
   },
   "dependencies": {
-    "@larksuiteoapi/node-sdk": "~1.4.0"
+    "@deepseek-ai/dsh-settings": "0.0.1-rc.1",
+    "@larksuiteoapi/node-sdk": "~1.4.0",
+    "zod": "^4.6.5"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": ">=3.0.0",
-    "@deepseek-ai/schemastery": ">=1.0.0"
+    "@deepseek-ai/schemastery": ">=1.0.0",
+    "react": ">=18.0.0"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/cordis": {
       "optional": true
     },
     "@deepseek-ai/schemastery": {
+      "optional": true
+    },
+    "react": {
       "optional": true
     }
   }
