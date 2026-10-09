@@ -73,7 +73,8 @@
     "vitest": "^1.4.0"
   },
   "dependencies": {
-    "@larksuiteoapi/node-sdk": "~1.4.0"
+    "@larksuiteoapi/node-sdk": "~1.4.0",
+    "zod": "^4.6.5"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": ">=3.0.0",
