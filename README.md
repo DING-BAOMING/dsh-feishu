@@ -1,126 +1,128 @@
-# dsh-feishu — 飞书 DSH 插件
+# dsh-feishu-cloud — 飞书 DSH 插件
 
-> 让 DeepSeek Harness 直接读写飞书云盘、云文档和多维表格
+
+> 璁?DeepSeek Harness 鐩存帴璇诲啓椋炰功浜戠洏銆佷簯鏂囨。鍜屽缁磋〃鏍?
 
 [![CI](https://github.com/DING-BAOMING/dsh-feishu/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/DING-BAOMING/dsh-feishu/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20.3.0-brightgreen)](https://nodejs.org/)
 
-## 功能特性
+## 鍔熻兘鐗规€?
 
-| 模块 | 功能 |
+| 妯″潡 | 鍔熻兘 |
 |------|------|
-| **云盘（drive）** | 上传 / 下载 / 列出 / 删除文件，显示云盘容量 |
-| **云文档（docx）** | 创建 / 写入 / 读取 / 删除文档 |
-| **多维表格（bitable）** | 创建多维表格，CRUD 记录 |
+| **浜戠洏锛坉rive锛?* | 涓婁紶 / 涓嬭浇 / 鍒楀嚭 / 鍒犻櫎鏂囦欢锛屾樉绀轰簯鐩樺閲?|
+| **浜戞枃妗ｏ紙docx锛?* | 鍒涘缓 / 鍐欏叆 / 璇诲彇 / 鍒犻櫎鏂囨。 |
+| **澶氱淮琛ㄦ牸锛坆itable锛?* | 鍒涘缓澶氱淮琛ㄦ牸锛孋RUD 璁板綍 |
 
-> v1.0 完成基础 CRUD；v1.1 支持 >20MB 分卷上传
+> v1.0 瀹屾垚鍩虹 CRUD锛泇1.1 鏀寔 >20MB 鍒嗗嵎涓婁紶
 
-## 系统要求
+## 绯荤粺瑕佹眰
 
 - DeepSeek Harness (DSH)
-- Node.js ≥ 20.3.0
-- 飞书自建应用（个人版 / 企业版均可）
+- Node.js 鈮?20.3.0
+- 椋炰功鑷缓搴旂敤锛堜釜浜虹増 / 浼佷笟鐗堝潎鍙級
 
-## 快速安装
+## 蹇€熷畨瑁?
 
 ```bash
-# 从 npm 安装（发布后）
+# 浠?npm 瀹夎锛堝彂甯冨悗锛?
 dsh plugin add dsh-feishu
 
-# 或从源码安装
+# 鎴栦粠婧愮爜瀹夎
 git clone https://github.com/DING-BAOMING/dsh-feishu.git
 cd dsh-feishu
 pnpm install && pnpm build
 dsh plugin add ./dsh-feishu-*.tgz
 ```
 
-## 飞书应用配置
+## 椋炰功搴旂敤閰嶇疆
 
-1. 打开 [飞书开放平台](https://open.feishu.cn/app) → 创建自建应用
-2. 开通权限（按需开通）：
-   - `drive:file` — 云盘读写
-   - `docx:document` — 云文档读写
-   - `bitable:app` — 多维表格读写
-3. 获取 **App ID**（`cli_` 开头）和 **App Secret**
-4. 在 DSH 设置页 → 飞书插件 → 填入凭证 → 验证连接
+1. 鎵撳紑 [椋炰功寮€鏀惧钩鍙癩(https://open.feishu.cn/app) 鈫?鍒涘缓鑷缓搴旂敤
+2. 寮€閫氭潈闄愶紙鎸夐渶寮€閫氾級锛?
+   - `drive:file` 鈥?浜戠洏璇诲啓
+   - `docx:document` 鈥?浜戞枃妗ｈ鍐?
+   - `bitable:app` 鈥?澶氱淮琛ㄦ牸璇诲啓
+3. 鑾峰彇 **App ID**锛坄cli_` 寮€澶达級鍜?**App Secret**
+4. 鍦?DSH 璁剧疆椤?鈫?椋炰功鎻掍欢 鈫?濉叆鍑瘉 鈫?楠岃瘉杩炴帴
 
-> 个人版：权限自批；企业版：需管理员审批
+> 涓汉鐗堬細鏉冮檺鑷壒锛涗紒涓氱増锛氶渶绠＄悊鍛樺鎵?
 
-## 开发
+## 寮€鍙?
 
 ```bash
-pnpm install          # 安装依赖
-pnpm build            # 构建
-pnpm test             # 单元测试
-pnpm lint            # ESLint 检查
-pnpm dev             # 开发模式（热重载）
+pnpm install          # 瀹夎渚濊禆
+pnpm build            # 鏋勫缓
+pnpm test             # 鍗曞厓娴嬭瘯
+pnpm lint            # ESLint 妫€鏌?
+pnpm dev             # 寮€鍙戞ā寮忥紙鐑噸杞斤級
 ```
 
-## 安全设计
+## 瀹夊叏璁捐
 
-| 机制 | 说明 |
+| 鏈哄埗 | 璇存槑 |
 |------|------|
-| `appSecret` | 通过 `role('secret')` + `ctx.credentials.get()`，永不进日志/配置 |
-| 多账号隔离 | `Map<profileId, Client>`，多 Profile 不串号 |
-| 路径白名单 | 只能读写 DSH 工作区，禁止任意文件访问 |
-| QPS 限流 | 令牌桶保护，5 QPS 内 |
-| CI 密钥扫描 | GitHub Actions 自动检查代码中是否有硬编码密钥 |
+| `appSecret` | 閫氳繃 `role('secret')` + `ctx.credentials.get()`锛屾案涓嶈繘鏃ュ織/閰嶇疆 |
+| 澶氳处鍙烽殧绂?| `Map<profileId, Client>`锛屽 Profile 涓嶄覆鍙?|
+| 璺緞鐧藉悕鍗?| 鍙兘璇诲啓 DSH 宸ヤ綔鍖猴紝绂佹浠绘剰鏂囦欢璁块棶 |
+| QPS 闄愭祦 | 浠ょ墝妗朵繚鎶わ紝5 QPS 鍐?|
+| CI 瀵嗛挜鎵弿 | GitHub Actions 鑷姩妫€鏌ヤ唬鐮佷腑鏄惁鏈夌‖缂栫爜瀵嗛挜 |
 
-## 项目结构
+## 椤圭洰缁撴瀯
 
 ```
 dsh-feishu/
-├── src/
-│   ├── index.ts          # Host 入口：注册 tools + settings card
-│   ├── client/          # Settings Card UI（Phase 2+）
-│   └── lib/            # 核心库
-│       ├── client.ts     # FeishuClient 管理（多 Profile 隔离）
-│       ├── rateLimit.ts  # QPS 令牌桶
-│       ├── pathGuard.ts  # 路径白名单验证
-│       ├── errors.ts     # 统一错误处理
-│       └── types.ts      # 共享类型
-├── tests/
-│   └── unit/           # 单元测试
-├── docs/               # 完整设计文档（中文）
-├── package.json
-├── tsup.config.ts
-└── tsconfig.json
+鈹溾攢鈹€ src/
+鈹?  鈹溾攢鈹€ index.ts          # Host 鍏ュ彛锛氭敞鍐?tools + settings card
+鈹?  鈹溾攢鈹€ client/          # Settings Card UI锛圥hase 2+锛?
+鈹?  鈹斺攢鈹€ lib/            # 鏍稿績搴?
+鈹?      鈹溾攢鈹€ client.ts     # FeishuClient 绠＄悊锛堝 Profile 闅旂锛?
+鈹?      鈹溾攢鈹€ rateLimit.ts  # QPS 浠ょ墝妗?
+鈹?      鈹溾攢鈹€ pathGuard.ts  # 璺緞鐧藉悕鍗曢獙璇?
+鈹?      鈹溾攢鈹€ errors.ts     # 缁熶竴閿欒澶勭悊
+鈹?      鈹斺攢鈹€ types.ts      # 鍏变韩绫诲瀷
+鈹溾攢鈹€ tests/
+鈹?  鈹斺攢鈹€ unit/           # 鍗曞厓娴嬭瘯
+鈹溾攢鈹€ docs/               # 瀹屾暣璁捐鏂囨。锛堜腑鏂囷級
+鈹溾攢鈹€ package.json
+鈹溾攢鈹€ tsup.config.ts
+鈹斺攢鈹€ tsconfig.json
 ```
 
-## 文档导航
+## 鏂囨。瀵艰埅
 
-| 你想了解 | 文档 |
+| 浣犳兂浜嗚В | 鏂囨。 |
 |---------|------|
-| 功能规划 / 技术选型 | [docs/00-项目总览.md](./docs/00-项目总览.md) |
-| API 详细规格 | [docs/01-功能规格.md](./docs/01-功能规格.md) |
-| UI 设计稿 | [docs/02-UI设计.md](./docs/02-UI设计.md) |
-| 架构设计 | [docs/03-技术架构.md](./docs/03-技术架构.md) |
-| 开发计划 | [docs/04-开发计划.md](./docs/04-开发计划.md) |
-| 发布计划 | [docs/05-发布计划.md](./docs/05-发布计划.md) |
-| 审查报告 | [docs/06-审查报告.md](./docs/06-审查报告.md) |
-| 综合评估 | [docs/07-综合评估.md](./docs/07-综合评估.md) |
+| 鍔熻兘瑙勫垝 / 鎶€鏈€夊瀷 | [docs/00-椤圭洰鎬昏.md](./docs/00-椤圭洰鎬昏.md) |
+| API 璇︾粏瑙勬牸 | [docs/01-鍔熻兘瑙勬牸.md](./docs/01-鍔熻兘瑙勬牸.md) |
+| UI 璁捐绋?| [docs/02-UI璁捐.md](./docs/02-UI璁捐.md) |
+| 鏋舵瀯璁捐 | [docs/03-鎶€鏈灦鏋?md](./docs/03-鎶€鏈灦鏋?md) |
+| 寮€鍙戣鍒?| [docs/04-寮€鍙戣鍒?md](./docs/04-寮€鍙戣鍒?md) |
+| 鍙戝竷璁″垝 | [docs/05-鍙戝竷璁″垝.md](./docs/05-鍙戝竷璁″垝.md) |
+| 瀹℃煡鎶ュ憡 | [docs/06-瀹℃煡鎶ュ憡.md](./docs/06-瀹℃煡鎶ュ憡.md) |
+| 缁煎悎璇勪及 | [docs/07-缁煎悎璇勪及.md](./docs/07-缁煎悎璇勪及.md) |
 
-## 贡献
+## 璐＄尞
 
-欢迎提交 Issue 和 Pull Request！
+娆㈣繋鎻愪氦 Issue 鍜?Pull Request锛?
 
-提交 PR 前请确保：
-- `pnpm build` 通过
-- `pnpm test` 通过
-- PR 包含单元测试
-- 不包含任何密钥或凭证
+鎻愪氦 PR 鍓嶈纭繚锛?
+- `pnpm build` 閫氳繃
+- `pnpm test` 閫氳繃
+- PR 鍖呭惈鍗曞厓娴嬭瘯
+- 涓嶅寘鍚换浣曞瘑閽ユ垨鍑瘉
 
-## 许可证
+## 璁稿彲璇?
 
-MIT — 详见 [LICENSE](./LICENSE)
+MIT 鈥?璇﹁ [LICENSE](./LICENSE)
 
 ---
 
-## 状态看板
+## 鐘舵€佺湅鏉?
 
-| 版本 | 状态 | 说明 |
+| 鐗堟湰 | 鐘舵€?| 璇存槑 |
 |------|------|------|
-| v0.0.1 | 🔨 开发中 | Phase 0 骨架，P0 安全框架已嵌入 |
-| v1.0.0 | 📋 规划中 | 云盘 / 云文档 / 多维表格 基础功能 |
-| v1.1.0 | 📋 规划中 | 分卷上传（>20MB）/ 云文档富文本 |
+| v0.0.1 | 馃敤 寮€鍙戜腑 | Phase 0 楠ㄦ灦锛孭0 瀹夊叏妗嗘灦宸插祵鍏?|
+| v1.0.0 | 馃搵 瑙勫垝涓?| 浜戠洏 / 浜戞枃妗?/ 澶氱淮琛ㄦ牸 鍩虹鍔熻兘 |
+| v1.1.0 | 馃搵 瑙勫垝涓?| 鍒嗗嵎涓婁紶锛?20MB锛? 浜戞枃妗ｅ瘜鏂囨湰 |
+
