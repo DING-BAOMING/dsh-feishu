@@ -26,8 +26,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --ignore-scripts && pnpm approve-builds --allow 2>/dev/null || true
-        # 允许 esbuild 等 binary 依赖构建
+        run: pnpm install --ignore-scripts
 
       - name: Build
         run: pnpm build
@@ -41,7 +40,6 @@ jobs:
       - name: Test
         run: pnpm test
 
-  # 安全扫描：检查代码中是否有硬编码密钥
   security:
     runs-on: ubuntu-latest
     steps:
