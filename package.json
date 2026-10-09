@@ -76,8 +76,8 @@
     "@larksuiteoapi/node-sdk": "~1.4.0"
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "workspace:*",
-    "@deepseek-ai/schemastery": "workspace:*"
+    "@deepseek-ai/cordis": ">=3.0.0",
+    "@deepseek-ai/schemastery": ">=1.0.0"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/cordis": {
