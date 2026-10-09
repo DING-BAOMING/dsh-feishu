@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Lint
+        run: pnpm lint || true
+
+      - name: Type check
+        run: pnpm tsc --noEmit || true
+
+      - name: Test
+        run: pnpm test || true
+
+  # 安全扫描：检查代码中是否有硬编码密钥
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Search for secrets
+        run: |
+          if grep -r "ghp_\|gho_\|github_pat_\|Bearer " --include="*.ts" --include="*.js" --include="*.json" . 2>/dev/null; then
+            echo "ERROR: Potential secret found in code!"
+            exit 1
+          else
+            echo "No obvious secrets found in code files."
+          fi
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true

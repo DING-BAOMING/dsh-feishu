@@ -1,0 +1,12 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <rect width="128" height="128" rx="24" fill="#4C6EF5"/>
+  <g fill="#FFFFFF">
+    <!-- 云朵主体 -->
+    <ellipse cx="64" cy="72" rx="32" ry="20"/>
+    <circle cx="48" cy="66" r="16"/>
+    <circle cx="72" cy="62" r="14"/>
+    <circle cx="80" cy="70" r="10"/>
+    <!-- 向上箭头 -->
+    <path d="M64 38 L52 52 L60 52 L60 62 L68 62 L68 52 L76 52 Z" opacity="0.9"/>
+  </g>
+</svg>

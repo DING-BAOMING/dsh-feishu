@@ -1,0 +1,90 @@
+{
+  "name": "dsh-feishu",
+  "version": "0.0.1",
+  "description": "飞书云盘、云文档、多维表格 DSH 插件 — 让 DeepSeek Harness 直接读写飞书",
+  "description:en": "Feishu (Lark) cloud drive, documents, and bitable plugin for DeepSeek Harness",
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "feishu",
+    "larksuite",
+    "cloud-drive",
+    "docx",
+    "bitable"
+  ],
+  "homepage": "https://github.com/DING-BAOMING/dsh-feishu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DING-BAOMING/dsh-feishu"
+  },
+  "bugs": {
+    "url": "https://github.com/DING-BAOMING/dsh-feishu/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "DING-BAOMING",
+    "url": "https://github.com/DING-BAOMING"
+  },
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    }
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": ["@deepseek-ai/dsh-client-ui-settings-plugins"]
+    }
+  },
+  "files": [
+    "lib",
+    "assets",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=20.3.0"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint src --fix",
+    "lint:check": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "pub": "pnpm build && pnpm pack"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0",
+    "tsdown": "^0.8.0",
+    "vitest": "^1.4.0",
+    "eslint": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0"
+  },
+  "dependencies": {
+    "@larksuiteoapi/node-sdk": "~1.4.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "workspace:*",
+    "@deepseek-ai/schemastery": "workspace:*"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    }
+  }
+}

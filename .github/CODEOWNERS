@@ -1,0 +1,10 @@
+# 默认：所有变更需要仓库 owner 审核
+* @DING-BAOMING
+
+# 代码文件必须 owner 审核
+/src/**   @DING-BAOMING
+/tests/** @DING-BAOMING
+
+# 工作流文件必须 owner 审核
+/.github/workflows/* @DING-BAOMING
+/.github/CODEOWNERS @DING-BAOMING

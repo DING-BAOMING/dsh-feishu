@@ -1,0 +1,16 @@
+name: dsh-feishu
+version: 0.0.1
+description: 飞书云盘、云文档、多维表格 DSH 插件
+license: MIT
+homepage: https://github.com/DING-BAOMING/dsh-feishu
+repository:
+  type: git
+  url: https://github.com/DING-BAOMING/dsh-feishu
+keywords:
+  - deepseek-harness
+  - dsh-plugin
+  - feishu
+  - larksuite
+  - cloud-drive
+  - docx
+  - bitable
