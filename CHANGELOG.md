@@ -2,29 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [0.0.1] - 2024-XX-XX
+## [0.0.2] - 2026-10-10
 
 ### Added
+- Settings Card UI (Phase 2): credentials input (App ID / App Secret), connection verify button, storage quota bar, setup tutorial accordion
+- 18 host tools: drive (6) + docx (6) + bitable (6)
+- `@ts-nocheck` on client entry (DSH web shell provides React types at runtime)
+- `dist-client` output via tsup for DSH client module loading
 
-- Initial skeleton release
-- Phase 0 scaffolding: project structure, tsdown config, CI workflow
-- P0 security framework embedded:
-  - `Map<profileId, Client>` multi-profile isolation
-  - `RateLimiter` (5 QPS) for API rate protection
-  - `pathGuard` for allowed-path validation
-  - `ctx.credentials.get()` dynamic secret reading
-- Basic unit tests for `pathGuard`, `rateLimiter`, `client` isolation
-- GitHub Actions CI workflow
-- Branch protection + CODEOWNERS configured
-- MIT License
+### Changed
+- Package renamed from `dsh-feishu` (taken on npm) to `dsh-feishu-cloud`
+- `dsh.client.inject` array removed (settings section registered via `ctx.slots` in client entry)
 
-### Planned (v1.0.0)
+### Fixed
+- `@deepseek-ai/dsh-settings` moved from `devDependencies` to `dependencies` (runtime import)
+- Duplicate `export function apply` / `export { apply }` conflict resolved
+- `cordis.patch.yml` added to package `files` array
 
-- Cloud Drive: upload / download / list / delete files
-- Cloud Documents: create / write / read / delete docs
-- Bitable: create / CRUD records
-- Settings Card UI (Drive / Docx / Bitable tabs)
-- Multipart upload for files > 20MB
+## [0.0.1] - 2026-10-09
+
+### Added
+- Initial skeleton: `src/index.ts` with Phase 0 placeholder
+- `tsup.config.ts` build configuration
+- `cordis.patch.yml` plugin discovery patch
