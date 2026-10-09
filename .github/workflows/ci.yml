@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, fix/ci-workflow]
   pull_request:
     branches: [main]
 
@@ -27,8 +27,14 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: TypeScript check
+        run: npm run typecheck
+
       - name: Lint
-        run: npm run lint
+        run: npm run lint:check
+
+      - name: Test
+        run: npm run test
 
   security:
     runs-on: ubuntu-latest
@@ -46,5 +52,5 @@ jobs:
           fi
 
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ci-\${{ github.ref }}
   cancel-in-progress: true
