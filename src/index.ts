@@ -51,7 +51,7 @@ const configSchema = Zod.object({
   locale: Zod.enum(['zh-CN', 'en']).default('zh-CN'),
 })
 
-export { configSchema as Config }
+export { configSchema as Config, apply }
 
 // ============================================================================
 // 凭证获取辅助
@@ -145,7 +145,7 @@ function registerTool(
 // apply()
 // ============================================================================
 
-export function apply(ctx: Context, config: Record<string, unknown>): void {
+function apply(ctx: Context, config: Record<string, unknown>): void {
   installSettingsSection(ctx, FEISHU_NS, configSchema as any, config, {
     setSource: () => {},
     validate: () => {},
