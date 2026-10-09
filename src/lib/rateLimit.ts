@@ -10,7 +10,7 @@ const QPS_LIMIT = 5
 const REFILL_INTERVAL_MS = 200  // ponytail: 全局锁，吞吐量足够；per-account 锁在需要时升级
 const MAX_QUEUE_SIZE = 1000   // 队列上限，防止内存溢出
 
-class RateLimiter {
+export class RateLimiter {
   private tokens: number = QPS_LIMIT
   private lastRefillMs: number = Date.now()
   private queue: Array<() => void> = []
