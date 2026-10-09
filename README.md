@@ -2,7 +2,7 @@
 
 > 让 DeepSeek Harness 直接读写飞书云盘、云文档和多维表格
 
-[![CI](https://github.com/DING-BAOMING/dsh-feishu/actions/workflows/ci.yml/badge.svg)](https://github.com/DING-BAOMING/dsh-feishu/actions)
+[![CI](https://github.com/DING-BAOMING/dsh-feishu/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/DING-BAOMING/dsh-feishu/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20.3.0-brightgreen)](https://nodejs.org/)
 
@@ -84,7 +84,8 @@ dsh-feishu/
 │   └── unit/           # 单元测试
 ├── docs/               # 完整设计文档（中文）
 ├── package.json
-└── tsdown.config.ts
+├── tsup.config.ts
+└── tsconfig.json
 ```
 
 ## 文档导航

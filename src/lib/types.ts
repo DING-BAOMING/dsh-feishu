@@ -8,12 +8,12 @@
 
 export interface FeishuConfig {
   appId: string
-  appSecret: string   // role('secret') — 通过 ctx.credentials.get() 获取
+  appSecret: string
   driveFolderToken?: string
   docxFolderToken?: string
   bitableFolderToken?: string
-  uploadTimeout?: number   // ms，默认 60000
-  maxFileSize?: number     // MB，默认 20
+  uploadTimeout?: number
+  maxFileSize?: number
   locale?: 'zh-CN' | 'en'
 }
 
@@ -22,36 +22,32 @@ export interface FeishuConfig {
 // ============================================================================
 
 export interface DriveFile {
-  fileToken: string
+  token: string
   name: string
-  size: number        // bytes
-  createdAt: string
-  updatedAt: string
+  size: number
+  createdTime: string
+  updatedTime: string
   type: 'file' | 'folder'
+  mimeType?: string
 }
 
 export interface DriveQuota {
-  used: number   // bytes
-  total: number  // bytes
+  used: number
+  total: number
 }
 
-export interface UploadResult {
-  success: boolean
-  fileToken: string
-  fileName: string
+export interface UploadAllResponse {
+  file_token: string
+  file_size: number
+}
+
+export interface FileMetadata {
+  token: string
+  name: string
   size: number
-}
-
-export interface DownloadResult {
-  success: boolean
-  path: string
-  size: number
-}
-
-export interface ListFilesResult {
-  files: DriveFile[]
-  hasMore: boolean
-  pageToken?: string
+  created_time: string
+  updated_time: string
+  type: string
 }
 
 // ============================================================================
@@ -59,21 +55,24 @@ export interface ListFilesResult {
 // ============================================================================
 
 export interface DocxDocument {
-  documentId: string
+  document_id: string
   title: string
-  updatedAt: string
+  created_time: string
+  updated_time: string
+  owner?: string
 }
 
 export interface DocxBlock {
-  blockId: string
-  blockType: number
-  content?: string
-  children?: DocxBlock[]
+  block_id: string
+  parent_id?: string
+  children?: string[]
+  block_type: number
+  block_type_str?: string
+  data?: Record<string, unknown>
 }
 
-export interface WriteBlockResult {
-  success: boolean
-  blockId: string
+export interface DocxRawContent {
+  content: string
 }
 
 // ============================================================================
@@ -81,58 +80,31 @@ export interface WriteBlockResult {
 // ============================================================================
 
 export interface BitableApp {
-  appToken: string
+  app_token: string
   name: string
-}
-
-export interface BitableField {
-  fieldId: string
-  name: string
-  type: number
+  revision_id?: string
 }
 
 export interface BitableTable {
-  tableId: string
+  table_id: string
   name: string
-  fields: BitableField[]
+  default_view_id?: string
+  created_time?: string
+  updated_time?: string
+}
+
+export interface BitableField {
+  field_id: string
+  field_name: string
+  type: number
+  ui_hint?: {
+    options?: Array<{ name: string; color: number }>
+  }
 }
 
 export interface BitableRecord {
-  recordId: string
   fields: Record<string, unknown>
-}
-
-export interface InsertRecordResult {
-  success: boolean
-  recordId: string
-}
-
-// ============================================================================
-// 工具结果类型
-// ============================================================================
-
-export interface VerifyConnectionResult {
-  success: boolean
-  message: string
-  quota?: DriveQuota
-  userName?: string
-}
-
-export interface DeleteResult {
-  success: boolean
-}
-
-// ============================================================================
-// 错误类型
-// ============================================================================
-
-export class FeishuApiError extends Error {
-  constructor(
-    message: string,
-    public code: string,
-    public statusCode?: number
-  ) {
-    super(message)
-    this.name = 'FeishuApiError'
-  }
+  record_id: string
+  created_time?: string
+  updated_time?: string
 }

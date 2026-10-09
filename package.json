@@ -31,10 +31,6 @@
     ".": {
       "types": "./lib/index.d.ts",
       "default": "./lib/index.js"
-    },
-    "./client": {
-      "types": "./lib/client/index.d.ts",
-      "default": "./lib/client/index.js"
     }
   },
   "dsh": {
@@ -47,7 +43,6 @@
   },
   "files": [
     "lib",
-    "assets",
     "README.md",
     "LICENSE",
     "CHANGELOG.md"
