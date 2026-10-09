@@ -9,7 +9,6 @@ import { installSettingsSection, settingsNamespace } from '@deepseek-ai/dsh-sett
 import { getFeishuClient, resetClientForProfile, isValidAppId } from './lib/client'
 import { rateLimiter } from './lib/rateLimit'
 import { wrapFeishuError, FeishuApiError } from './lib/errors'
-import type { FeishuConfig } from './lib/types'
 
 export const FEISHU_NS = settingsNamespace('dsh-feishu')
 
