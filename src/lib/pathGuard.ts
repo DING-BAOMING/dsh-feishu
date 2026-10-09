@@ -6,6 +6,7 @@
  */
 
 import path from 'node:path'
+import { readFileSync, writeFileSync } from 'node:fs'
 
 // ============================================================================
 // 允许访问的根目录白名单
@@ -48,9 +49,7 @@ export function safeReadFile(filePath: string): Buffer {
     err.name = 'PATH_FORBIDDEN'
     throw err
   }
-  // 动态 import 避免顶层依赖
-  const fs = require('node:fs') as typeof import('node:fs')
-  return fs.readFileSync(filePath)
+  return readFileSync(filePath)
 }
 
 /**
@@ -63,6 +62,5 @@ export function safeWriteFile(filePath: string, data: Buffer | string): void {
     err.name = 'PATH_FORBIDDEN'
     throw err
   }
-  const fs = require('node:fs') as typeof import('node:fs')
-  fs.writeFileSync(filePath, data)
+  writeFileSync(filePath, data)
 }
