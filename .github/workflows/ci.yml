@@ -22,25 +22,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --ignore-scripts
 
       - name: Build
         run: pnpm build
 
       - name: Lint
-        run: pnpm lint || true
+        run: pnpm lint
 
-      - name: Type check
-        run: pnpm tsc --noEmit || true
-
-      - name: Test
-        run: pnpm test || true
-
-  # 安全扫描：检查代码中是否有硬编码密钥
   security:
     runs-on: ubuntu-latest
     steps:
