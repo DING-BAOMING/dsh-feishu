@@ -13,7 +13,7 @@ import type { FeishuConfig } from './lib/types'
 
 export const FEISHU_NS = settingsNamespace('dsh-feishu')
 
-export const Config = z.object<FeishuConfig>({
+export const Config = z.object({
   appId:             z.string(),
   appSecret:         z.string().role('secret'),
   driveFolderToken:  z.string().optional(),
@@ -24,7 +24,7 @@ export const Config = z.object<FeishuConfig>({
   locale:            z.enum(['zh-CN', 'en']).default('zh-CN'),
 })
 
-export function apply(ctx: Context, config: FeishuConfig) {
+export function apply(ctx: Context, config: Record<string, unknown>) {
   installSettingsSection(ctx, FEISHU_NS, Config, config, {
     setSource: () => {},
     validate: (value) => {
