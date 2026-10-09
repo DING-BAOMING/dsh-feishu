@@ -13,7 +13,6 @@ import { wrapFeishuError, FeishuApiError, isPathError } from './lib/errors'
 import { isPathAllowed, safeReadFile } from './lib/pathGuard'
 import type {
   DriveFile,
-  DriveQuota,
   DocxDocument,
   DocxBlock,
   BitableApp,
@@ -129,7 +128,7 @@ function registerTool(
   tool: {
     name: string
     description: string
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     parameters: Zod.ZodType
     execute: (params: Record<string, unknown>, ctx: Context) => Promise<unknown>
   }
