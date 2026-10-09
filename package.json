@@ -1,6 +1,6 @@
 {
   "name": "dsh-feishu",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "飞书云盘、云文档、多维表格 DSH 插件 — 让 DeepSeek Harness 直接读写飞书",
   "description:en": "Feishu (Lark) cloud drive, documents, and bitable plugin for DeepSeek Harness",
   "keywords": [
