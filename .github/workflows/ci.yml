@@ -26,19 +26,19 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Build
         run: pnpm build
 
       - name: Lint
-        run: pnpm lint || true
+        run: pnpm lint
 
       - name: Type check
-        run: pnpm tsc --noEmit || true
+        run: pnpm typecheck
 
       - name: Test
-        run: pnpm test || true
+        run: pnpm test
 
   # 安全扫描：检查代码中是否有硬编码密钥
   security:
