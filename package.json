@@ -66,19 +66,19 @@
     "pub": "pnpm build && pnpm pack"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "^4.0.4",
+    "@deepseek-ai/cordis": "^4.1.0",
     "@deepseek-ai/dsh-settings": "0.0.1-rc.1",
-    "@deepseek-ai/schemastery": "^3.18.4",
+    "@deepseek-ai/schemastery": "^3.19.0",
     "@types/node": "^20.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.72.1",
+    "@typescript-eslint/parser": "^8.72.1",
     "eslint": "^9.0.0",
     "tsup": "^8.5.0",
     "typescript": "^5.4.0",
     "vitest": "^1.4.0"
   },
   "dependencies": {
-    "@larksuiteoapi/node-sdk": "~1.4.0"
+    "@larksuiteoapi/node-sdk": "~1.76.0"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": ">=3.0.0",
